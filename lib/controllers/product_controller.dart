@@ -5,7 +5,10 @@ import 'package:http/http.dart' as http;
 import '../models/product.dart';
 
 class ProductController extends GetxController {
+  // define the b se url
   static const base_url = "https://fakestoreapi.com";
+
+
 
   var productList = [].obs;
   var isLoading = true.obs;
@@ -27,6 +30,11 @@ class ProductController extends GetxController {
     }
     //return the list of products as an observable list of products (RxList)
     return productList;
+  }
+
+// get a single product
+  getProductById(int id) {
+    return productList.firstWhere((element) => element.id == id);
   }
 
   @override
