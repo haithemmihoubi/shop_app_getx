@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,20 +10,22 @@ class ProductController extends GetxController {
   var productList = [].obs;
   var isLoading = true.obs;
 
-  Future getProductList() async {
-    final productsUrl=Uri.parse('$base_url/products');
-    var response = await http.get(productsUrl);
-
+// get all the products
+  Future<RxList> getProductList() async {
+    //de fine the endpoint url
+    final productsEndpoint = Uri.parse('$base_url/products');
+    //get the Json response
+    var response = await http.get(productsEndpoint);
     if (response.statusCode == 200) {
-      print('response $response');
+      //decode the json response
       var responseJson = json.decode(response.body);
-      print('responsejson $responseJson');
-     productList.assignAll(responseJson.map((m) => Product.fromJson(m)).toList());
-      print("This is the product list ${productList.length}");
-   
+      //convert the json response to a list of products
+      productList
+          .assignAll(responseJson.map((m) => Product.fromJson(m)).toList());
     } else {
-      throw Exception("Failed to load data");
+      throw Exception('Failed to load products');
     }
+    //return the list of products as an observable list of products (RxList)
     return productList;
   }
 

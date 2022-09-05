@@ -14,8 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
      debugShowCheckedModeBanner: false,
       theme: ThemeData(
+      useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
       home:  HomeScreen(),
