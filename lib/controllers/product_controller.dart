@@ -11,6 +11,7 @@ class ProductController extends GetxController {
 
 
   var productList = [].obs;
+  var categoryList = [].obs;
   var isLoading = true.obs;
 
 // get all the products
@@ -35,6 +36,22 @@ class ProductController extends GetxController {
 // get a single product
   getProductById(int id) {
     return productList.firstWhere((element) => element.id == id);
+  }
+  // get all the categories
+  Future<List> getCategories() async {
+    //de fine the endpoint url
+    final categoriesEndpoint = Uri.parse('$base_url/products/categories');
+    //get the Json response
+    var response = await http.get(categoriesEndpoint);
+    if (response.statusCode == 200) {
+      //decode the json response
+      var responseJson = json.decode(response.body);
+      //convert the json response to a list of products
+      categoryList.assignAll(responseJson.map((m) => m.toString()).toList());
+      return categoryList;
+    } else {
+      throw Exception('Failed to load products');
+    }
   }
 
   @override
