@@ -24,7 +24,7 @@ class Categories extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     elevation: 0.2,
                     shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
                   onPressed: () {},
@@ -32,6 +32,7 @@ class Categories extends StatelessWidget {
                     controller.categoryList[index],
                     style: const TextStyle(
                       color: Colors.black,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),);
               },
@@ -39,41 +40,11 @@ class Categories extends StatelessWidget {
           ),
         );
       } else {
-        return const Center(
-          child: CircularProgressIndicator(),
+        return  Center(
+          child: CircularProgressIndicator( color: Colors.blue.withOpacity(0.2),),
         );
       }
     });
-    /*SizedBox(
-      height: Get.height * 0.09,
-      child: Card(
-        elevation: 0,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                elevation: 0.2,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
-              ),
-              onPressed: () {},
-              child: const Text(
-                'All',
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-
-
-          ],
-        ),
-      ),
-    );*/
+    
   }
 }

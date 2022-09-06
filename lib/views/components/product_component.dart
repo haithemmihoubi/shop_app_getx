@@ -21,6 +21,7 @@ class ProductComponent extends StatelessWidget {
         //Get.toNamed('/product');
       },
       child: Container(
+
           height: 200,
           width: Get.width,
           margin: const EdgeInsets.fromLTRB(15, 0, 15, 0),

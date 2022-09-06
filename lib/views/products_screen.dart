@@ -9,7 +9,7 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: Get.height,
       child: FutureBuilder(
           future: controller.getProductList(),
