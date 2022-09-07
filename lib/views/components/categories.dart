@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/product_controller.dart';
+import '../products_category.dart';
 
 class Categories extends StatelessWidget {
   final controller = Get.put(ProductController());
@@ -27,7 +28,9 @@ class Categories extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(()=>ProductsCategory(category: controller.categoryList[index]));
+                  },
                   child:  Text(
                     controller.categoryList[index],
                     style: const TextStyle(

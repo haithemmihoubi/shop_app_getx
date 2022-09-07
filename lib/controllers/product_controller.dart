@@ -13,7 +13,7 @@ class ProductController extends GetxController {
   var productList = [].obs;
   var categoryList = [].obs;
   var isLoading = true.obs;
-
+  var productListByCategory = [].obs;
 // get all the products
   Future<RxList> getProductList() async {
     //de fine the endpoint url
@@ -53,11 +53,29 @@ class ProductController extends GetxController {
       throw Exception('Failed to load products');
     }
   }
+// get a specific category
+  Future getProductsByCategoryName(String name) async {
+    // define the end point url
+    final productsEndpoint = Uri.parse('$base_url/products/category/$name');
+    //get the Json response
+    var response= await http.get(productsEndpoint);
+    if (response.statusCode == 200) {
+      //decode the json response
+      var responseJson = await json.decode(response.body);
+      //convert the json response to a list of products
+      productListByCategory
+          .assignAll(responseJson.map((m) => Product.fromJson(m)).toList());
+      return productListByCategory;
 
+    } else {
+      throw Exception('Failed to load products');
+    }
+    //return productListByCategory;
+  }
   @override
   void onInit() {
     getProductList();
-
+    getCategories();
     super.onInit();
   }
 }

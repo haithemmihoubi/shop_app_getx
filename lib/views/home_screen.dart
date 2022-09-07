@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     text: 'Likes',
                   ),
                   GButton(
-                    icon: Iconsax.headphone,
+                    icon: Iconsax.shop,
                     text: 'Search',
                   ),
                   GButton(
