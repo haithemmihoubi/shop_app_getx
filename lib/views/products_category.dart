@@ -14,7 +14,7 @@ class ProductsCategory extends StatelessWidget {
     print(controller.productListByCategory.length);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Products Category'),
+        title: Text(category),
       ),
       body: FutureBuilder(
           future:  controller.getProductsByCategoryName(category),
@@ -25,6 +25,10 @@ class ProductsCategory extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
+                        onTap: () {
+                          showImage(controller.productListByCategory[index].image,controller.productListByCategory[index].title );
+
+                        },
                         leading: Image.network(
                           controller.productListByCategory[index].image,
                           width: 100,
@@ -32,7 +36,7 @@ class ProductsCategory extends StatelessWidget {
                         ),
                         title: Text(controller.productListByCategory[index].title),
                         subtitle: Text(
-                            controller.productListByCategory[index].price.toString()),
+                            '${controller.productListByCategory[index].price.toString()} \$'),
 
                       ),
                     );
@@ -45,4 +49,18 @@ class ProductsCategory extends StatelessWidget {
           }),
     );
   }
+  void showImage($image,$title) {
+    Get.defaultDialog(
+      title: $title,
+      content: Image.network(
+        $image,
+        width: 250,
+        height: 300,
+        fit: BoxFit.contain,
+      ),
+      radius: 10,
+      barrierDismissible: true,
+    );
+  }
+
 }
